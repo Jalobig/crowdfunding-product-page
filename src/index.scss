@@ -1,0 +1,25 @@
+:root {
+  // Colors
+
+  /// Primary
+
+  --color-primary: hsl(176, 50%, 47%);
+  --color-primary-dark: #147b74;
+
+  /// Neutral
+  --color-bg: hsl(0, 0%, 95%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-black: hsl(0, 0%, 0%);
+  --color-grey-dark: hsl(0, 0%, 48%);
+}
+*,
+*::after,
+*::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "Commissioner", sans-serif;
+  background-color: var(--color-bg);
+}

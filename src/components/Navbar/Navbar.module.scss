@@ -1,0 +1,35 @@
+@keyframes animation-nav {
+    0%{
+        transform: scale(0.9);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(0.9);
+
+    }
+}
+.navbar{
+    margin: 3.125rem auto;
+    max-width: 69.375rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__nav{
+        list-style: none;
+        padding-inline-start: 0;
+        color: var(--color-white);
+        display: flex;
+        &--item{
+            font-size: .9rem;
+            &:not(:last-child){
+                margin-right: 1.5rem;
+            }
+            &:hover{
+                cursor: pointer;
+                animation: animation-nav 1s infinite;
+            }
+        }
+    }
+}
