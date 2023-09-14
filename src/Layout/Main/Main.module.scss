@@ -8,6 +8,7 @@
 }
 .main {
   margin: 15rem auto 5rem;
+  width: 90%;
   max-width: 45.625rem;
 }
 .company {
@@ -29,10 +30,18 @@
   &__title {
     font-size: 1.7rem;
     margin-bottom: 1.5rem;
+    @media only screen and (max-width:600px) {
+      text-align: center;
+      width: 85%;
+    }
   }
   &__description {
     color: var(--color-grey-dark);
     margin-bottom: 2rem;
+    @media only screen and (max-width:600px) {
+      text-align: center;
+      width: 85%;
+    }
   }
   &__row {
     width: 85%;
@@ -49,20 +58,37 @@
   padding: 3.125rem;
   &__row {
     display: flex;
+    @media only screen and (max-width:600px) {
+      flex-direction: column;
+      align-items: center;
+    }
+    
   }
   &__column {
+    text-align: center;
     &:not(:last-child) {
-      border-right: 2px solid var(--color-bg);
-      margin-right: 3.1rem;
-      padding-right: 3.1rem;
+      
     }
   }
   &__number {
     font-size: 2rem;
     font-weight: 700;
+    margin-bottom: 1rem;
   }
   &__info {
     color: var(--color-grey-dark);
+  }
+  &__line{
+    border-right: .2px solid var(--color-grey-dark);
+    margin: 0 3.1rem;
+    
+    @media only screen and (max-width:600px) {
+      border-right: none;
+      border-bottom: .2px solid var(--color-grey-dark);
+      margin:3.1rem 0;
+      width: 5rem;
+      
+    }
   }
   &__pourcent {
     margin-top: 2rem;
@@ -102,13 +128,20 @@
   }
   &__row {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
   }
   &__heading {
+    @media only screen and (max-width:479px) {
+     margin-bottom: 1rem; 
+    }
   }
   &__group {
     display: flex;
     align-items: center;
+    @media only screen and (max-width:600px) {
+      
+    margin-bottom: 1rem;}
   }
   &__button--amount {
     font-family: inherit;
@@ -117,6 +150,7 @@
     border: none;
     background-color: transparent;
     color: var(--color-primary);
+    padding: 0;
   }
   &__amount{
     font-size: 2rem;

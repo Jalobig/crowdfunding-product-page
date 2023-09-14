@@ -2,8 +2,11 @@ import React from "react";
 import classes from "./BookmarkButton.module.scss";
 import IconBookmark from "../../../images/icon-bookmark.svg";
 import IconBookmarked from "../../../images/bookmark.svg";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 
 const BookmarkButton = (props) => {
+  const media = useMediaQuery("only screen and (max-width:600px)");
+
   return (
     <button
       onClick={props.onClick}
@@ -16,7 +19,7 @@ const BookmarkButton = (props) => {
         alt="BookMark Icon"
         className={classes.button__icon}
       />
-      {props.children}
+      {!media && props.children}
     </button>
   );
 };

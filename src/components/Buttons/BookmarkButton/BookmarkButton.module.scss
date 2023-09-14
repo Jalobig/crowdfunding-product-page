@@ -8,10 +8,17 @@
     font-size: 1rem;
     background-color: var(--color-bg);
     transition: all .3s;
+    @media only screen and (max-width:600px) {
+     padding: 0; 
+    }
+    
     &__icon{
         margin-right: 1rem;
         transition: all .3s;
-        
+        @media only screen and (max-width:600px) {
+            margin-right: 0;
+       
+        }
     }
     &:hover{
         cursor: pointer;

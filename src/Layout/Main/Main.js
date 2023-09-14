@@ -3,9 +3,13 @@ import classes from "./Main.module.scss";
 import LogoMastercraft from "../../images/logo-mastercraft.svg";
 import PrimaryButton from "../../components/Buttons/PrimaryButton/PrimaryButton";
 import BookmarkButton from "../../components/Buttons/BookmarkButton/BookmarkButton";
+import Modal from "../../components/Modal/Modal";
+import useMediaQuery from "../../hooks/useMediaQuery"
 
 const Main = () => {
+  const media = useMediaQuery('only screen and (max-width:600px)')
   const [bookmark, setBookmark] = useState(false);
+  const [modalActive, setModalActive] = useState(false)
 
   const bookmarkHandler = () => {
     setBookmark((prevState) => !prevState);
@@ -38,10 +42,12 @@ const Main = () => {
             <p className={classes.stat__number}>$89,914</p>
             <p className={classes.stat__info}>of $100,000 backed</p>
           </div>
+          <div className={classes.stat__line}></div>
           <div className={classes.stat__column}>
             <p className={classes.stat__number}>5,007</p>
             <p className={classes.stat__info}>total backers</p>
           </div>
+          <div className={classes.stat__line}></div>
           <div className={classes.stat__column}>
             <p className={classes.stat__number}>56</p>
             <p className={classes.stat__info}>days left</p>
@@ -134,6 +140,7 @@ const Main = () => {
           </div>
         </div>
       </div>
+      {modalActive && <Modal/>}
     </main>
   );
 };
