@@ -32,6 +32,7 @@ const Modal = (props) => {
     noRewardReset()
     props.onClose()
     props.onSuccess()
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   const {
     value: enteredBamboo,
@@ -50,6 +51,7 @@ const Modal = (props) => {
     bambooReset()
     props.onClose()
     props.onSuccess()
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   const {
     value: enteredBlackEdition,
@@ -68,6 +70,7 @@ const Modal = (props) => {
     blackEditionReset()
     props.onClose()
     props.onSuccess()
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
 

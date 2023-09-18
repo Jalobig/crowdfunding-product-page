@@ -260,7 +260,10 @@ const Main = () => {
               <p className={classes.pledge__amount}>{modal.bamboo.amount}</p>
               <p className={classes["pledge__amount-text"]}>left</p>
             </div>
-            <PrimaryButton onClick={bambooSelection}>
+            <PrimaryButton onClick={()=>{
+              bambooSelection()
+              window.scrollTo({ top: 500, behavior: 'smooth' });
+              }}>
               Select Reward
             </PrimaryButton>
           </div>
@@ -282,7 +285,9 @@ const Main = () => {
               <p className={classes.pledge__amount}>{modal.blackEdition.amount}</p>
               <p className={classes["pledge__amount-text"]}>left</p>
             </div>
-            <PrimaryButton onClick={blackEditionSelection}>
+            <PrimaryButton onClick={()=>{
+              blackEditionSelection()
+              window.scrollTo({ top: 700, behavior: 'smooth' });}}>
               Select Reward
             </PrimaryButton>
           </div>
