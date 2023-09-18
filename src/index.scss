@@ -20,6 +20,10 @@
   margin: 0;
   box-sizing: border-box;
 }
+::selection{
+  background: var(--color-primary);
+  color: var(--color-white);
+}
 body {
   margin: 0;
   font-family: "Commissioner", sans-serif;

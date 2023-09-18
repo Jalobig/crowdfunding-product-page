@@ -4,15 +4,174 @@ import LogoMastercraft from "../../images/logo-mastercraft.svg";
 import PrimaryButton from "../../components/Buttons/PrimaryButton/PrimaryButton";
 import BookmarkButton from "../../components/Buttons/BookmarkButton/BookmarkButton";
 import Modal from "../../components/Modal/Modal";
-import useMediaQuery from "../../hooks/useMediaQuery"
+import ModalSuccess from "../../components/Modal/ModalSuccess";
 
 const Main = () => {
-  const media = useMediaQuery('only screen and (max-width:600px)')
+  const locale = "en-Us";
+  const options = { minimumFractionDigits: 0, maximumFractionDigits: 0 };
+  const formatter = new Intl.NumberFormat(locale, options);
+
   const [bookmark, setBookmark] = useState(false);
-  const [modalActive, setModalActive] = useState(false)
+  const [modal, setModal] = useState({
+    active: false,
+    noreward: {
+      amount: 999999999999,
+      isChosen: false,
+    },
+    bamboo: {
+      amount: 101,
+      isChosen: false,
+    },
+    blackEdition: {
+      amount: 64,
+      isChosen: false,
+    },
+    mahogany: {
+      amount: 0,
+      isChosen: false,
+    },
+  });
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [moneyRaised, setMoneyRaised] = useState(89914);
+  const [backer, setBacker] = useState(5007);
 
   const bookmarkHandler = () => {
     setBookmark((prevState) => !prevState);
+  };
+  const togleModalHandler = () => {
+    setModal({
+      ...modal,
+      active: !modal.active,
+      noreward: {
+        ...modal.noreward,
+        isChosen: false,
+      },
+      bamboo: {
+        ...modal.bamboo,
+        isChosen: false,
+      },
+      blackEdition: {
+        ...modal.blackEdition,
+        isChosen: false,
+      },
+      mahogany: {
+        ...modal.mahogany,
+        isChosen: false,
+      },
+    });
+  };
+  const noRewardSelection = () => {
+    setModal({
+      ...modal,
+      active: true,
+      noreward: {
+        ...modal.noreward,
+        isChosen: true,
+      },
+      bamboo: {
+        ...modal.bamboo,
+        isChosen: false,
+      },
+      blackEdition: {
+        ...modal.blackEdition,
+        isChosen: false,
+      },
+      mahogany: {
+        ...modal.mahogany,
+        isChosen: false,
+      },
+    });
+  };
+  const bambooSelection = () => {
+    setModal({
+      ...modal,
+      active: true,
+      noreward: {
+        ...modal.noreward,
+        isChosen: false,
+      },
+      bamboo: {
+        ...modal.bamboo,
+        isChosen: true,
+      },
+      blackEdition: {
+        ...modal.blackEdition,
+        isChosen: false,
+      },
+      mahogany: {
+        ...modal.mahogany,
+        isChosen: false,
+      },
+    });
+  };
+  const blackEditionSelection = () => {
+    setModal({
+      ...modal,
+      active: true,
+      noreward: {
+        ...modal.noreward,
+        isChosen: false,
+      },
+      bamboo: {
+        ...modal.bamboo,
+        isChosen: false,
+      },
+      blackEdition: {
+        ...modal.blackEdition,
+        isChosen: true,
+      },
+      mahogany: {
+        ...modal.mahogany,
+        isChosen: false,
+      },
+    });
+  };
+  const mahoganySelection = () => {
+    setModal({
+      ...modal,
+      active: true,
+      noreward: {
+        ...modal.noreward,
+        isChosen: false,
+      },
+      bamboo: {
+        ...modal.bamboo,
+        isChosen: false,
+      },
+      blackEdition: {
+        ...modal.blackEdition,
+        isChosen: false,
+      },
+      mahogany: {
+        ...modal.mahogany,
+        isChosen: true,
+      },
+    });
+  };
+  const bambooAmountReduction = () => {
+    setModal({
+      ...modal,
+      bamboo: {
+        amount: modal.bamboo.amount -= 1,
+        isChosen: false,
+      }
+    })
+  }
+  const blackEditionAmountReduction = () => {
+    setModal({
+      ...modal,
+      blackEdition: {
+        amount: modal.blackEdition.amount -= 1,
+        isChosen: false,
+      }
+    })
+  }
+  const successToggleHandler = () => {
+    setIsSuccess((prevState) => !prevState);
+  };
+  const newBackerHandler = (amount) => {
+    setBacker((prevState) => prevState+=1);
+    setMoneyRaised((prevState) => (prevState += amount));
   };
 
   return (
@@ -30,7 +189,9 @@ const Main = () => {
           A beautiful & handcrafted monitor stand to reduce neck and eye strain.
         </p>
         <div className={classes.company__row}>
-          <PrimaryButton>Back this project</PrimaryButton>
+          <PrimaryButton onClick={togleModalHandler}>
+            Back this project
+          </PrimaryButton>
           <BookmarkButton active={bookmark} onClick={bookmarkHandler}>
             {bookmark ? "Bookmarked" : "Bookmark"}
           </BookmarkButton>
@@ -39,12 +200,14 @@ const Main = () => {
       <div className={classes.stat}>
         <div className={classes.stat__row}>
           <div className={classes.stat__column}>
-            <p className={classes.stat__number}>$89,914</p>
+            <p className={classes.stat__number}>
+              ${formatter.format(moneyRaised)}
+            </p>
             <p className={classes.stat__info}>of $100,000 backed</p>
           </div>
           <div className={classes.stat__line}></div>
           <div className={classes.stat__column}>
-            <p className={classes.stat__number}>5,007</p>
+            <p className={classes.stat__number}>{formatter.format(backer)}</p>
             <p className={classes.stat__info}>total backers</p>
           </div>
           <div className={classes.stat__line}></div>
@@ -55,7 +218,12 @@ const Main = () => {
         </div>
 
         <div className={classes.stat__pourcent}>
-          <div className={classes.stat__fill}></div>
+          <div
+            className={classes.stat__fill}
+            style={{
+              width: `${moneyRaised / 1000}%`,
+            }}
+          ></div>
         </div>
       </div>
 
@@ -89,10 +257,12 @@ const Main = () => {
           </p>
           <div className={classes.pledge__row}>
             <div className={classes.pledge__group}>
-              <p className={classes.pledge__amount}>101</p>
+              <p className={classes.pledge__amount}>{modal.bamboo.amount}</p>
               <p className={classes["pledge__amount-text"]}>left</p>
             </div>
-            <PrimaryButton>Select Reward</PrimaryButton>
+            <PrimaryButton onClick={bambooSelection}>
+              Select Reward
+            </PrimaryButton>
           </div>
         </div>
         <div className={classes.pledge}>
@@ -109,10 +279,12 @@ const Main = () => {
           </p>
           <div className={classes.pledge__row}>
             <div className={classes.pledge__group}>
-              <p className={classes.pledge__amount}>64</p>
+              <p className={classes.pledge__amount}>{modal.blackEdition.amount}</p>
               <p className={classes["pledge__amount-text"]}>left</p>
             </div>
-            <PrimaryButton>Select Reward</PrimaryButton>
+            <PrimaryButton onClick={blackEditionSelection}>
+              Select Reward
+            </PrimaryButton>
           </div>
         </div>
         <div className={`${classes.pledge} ${classes.disabled}`}>
@@ -140,7 +312,21 @@ const Main = () => {
           </div>
         </div>
       </div>
-      {modalActive && <Modal/>}
+      {modal.active && (
+        <Modal
+          noRewardSelection={noRewardSelection}
+          bambooSelection={bambooSelection}
+          blackEditionSelection={blackEditionSelection}
+          mahoganySelection={mahoganySelection}
+          modal={modal}
+          onClose={togleModalHandler}
+          onSuccess={successToggleHandler}
+          newBackerHandler={newBackerHandler}
+          bambooAmountReduction={bambooAmountReduction}
+          blackEditionAmountReduction={blackEditionAmountReduction}
+        />
+      )}
+      {isSuccess && <ModalSuccess onClick={successToggleHandler} />}
     </main>
   );
 };
